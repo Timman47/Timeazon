@@ -19,15 +19,33 @@ import * as nodejs from 'aws-cdk-lib/aws-lambda-nodejs'
 import * as apigw from 'aws-cdk-lib/aws-apigateway'
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb'
 
+/**
+ * @typedef {import('aws-cdk-lib').StackProps & {
+ *      stackName: string,
+ *      subDomain: string,
+ *      domainName: string,
+ *      permissionsBoundaryPolicyName: string,
+ *      vpcName: string,
+ *      dbName: string,
+ *      certArn: string,
+ *      environmentName: 'dev' | 'prod'
+ *     }} CdkStackProps
+ */
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-
 export class CdkStack extends Stack {
+  /**
+   * 
+   * @param {Construct} scope 
+   * @param {string} id 
+   * @param {CdkStackProps} props 
+   */
   constructor(scope, id, props) {
     super(scope, id, props);
-
+    const isDev = props.environmentName === 'dev'
+    const isProd = props.environmentName === 'prod'
     // ----------------------------------
     // Domains
     // ----------------------------------
@@ -39,6 +57,7 @@ export class CdkStack extends Stack {
     // ----------------------------------
     cdk.Tags.of(this).add('Owner', props.stackName)
     cdk.Tags.of(this).add('Project', 'timeazon')
+    cdk.Tags.of(this).add('Environment', props.environmentName)
     
     // ----------------------------------
     // Permissions boundary

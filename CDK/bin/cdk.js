@@ -3,6 +3,7 @@ import * as cdk from 'aws-cdk-lib';
 import { CdkStack } from '../lib/cdk-stack.js';
 
 const stackName = process.env.GROUP_PROJECT_STACK_NAME
+const environmentName = process.env.APP_ENV || 'dev'
 
 if (!stackName || !stackName.trim()) {
   console.error('Environment variable GROUP_PROJECT_STACK_NAME is not set')
@@ -20,11 +21,12 @@ const settings = {
   domainName: 'cta-training.academy', // Root domain
   subDomain: stackName.toLowerCase(),
   dbName: 'dev',
-  vpcName: 'CTASharedVPC-vpc'
+  vpcName: 'CTASharedVPC-vpc',
+  environmentName
 }
 
 const app = new cdk.App();
-new CdkStack(app, 'devStack', {
+new CdkStack(app, 'CdkStack', {
   env: settings.env,
   permissionsBoundaryPolicyName: settings.permissionsBoundaryPolicyName,
   subDomain: settings.subDomain,
@@ -32,7 +34,8 @@ new CdkStack(app, 'devStack', {
   certArn: settings.certArn,
   domainName: settings.domainName,
   dbName: settings.dbName,
-  vpcName: settings.vpcName  
+  vpcName: settings.vpcName,
+  environmentName
 });
 
 new CdkStack(app, 'prodStack', {
