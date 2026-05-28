@@ -24,7 +24,18 @@ const settings = {
 }
 
 const app = new cdk.App();
-new CdkStack(app, 'CdkStack', {
+new CdkStack(app, 'devStack', {
+  env: settings.env,
+  permissionsBoundaryPolicyName: settings.permissionsBoundaryPolicyName,
+  subDomain: settings.subDomain,
+  stackName: settings.stackName,
+  certArn: settings.certArn,
+  domainName: settings.domainName,
+  dbName: settings.dbName,
+  vpcName: settings.vpcName  
+});
+
+new CdkStack(app, 'prodStack', {
   env: settings.env,
   permissionsBoundaryPolicyName: settings.permissionsBoundaryPolicyName,
   subDomain: settings.subDomain,
