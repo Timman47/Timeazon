@@ -182,5 +182,3 @@ You will now:
 
 There are lots of comments around the stack file that will guide you as to things that need to be updated to match up with your react folders. 
 I would advise you look at the folder structure first, then hook up any paths that need updating (**Deployments**)
-
-tan new branch
