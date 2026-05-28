@@ -2,7 +2,7 @@
 import * as cdk from 'aws-cdk-lib';
 import { CdkStack } from '../lib/cdk-stack.js';
 
-const stackName = process.env.GROUP_PROJECT_STACK_NAME
+const stackName = process.env.GROUP_PROJECT_STACK_NAME // maybe add which stack to the stack name eg. ambiance-timeazon-dev
 const environmentName = process.env.APP_ENV || 'dev'
 
 if (!stackName || !stackName.trim()) {
