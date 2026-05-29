@@ -28,7 +28,8 @@ import * as dynamodb from 'aws-cdk-lib/aws-dynamodb'
  *      vpcName: string,
  *      dbName: string,
  *      certArn: string,
- *      environmentName: 'dev' | 'prod'
+ *      environmentName: 'dev' | 'prod',
+ *      devWebAclArn?: string
  *     }} CdkStackProps
  */
 
@@ -469,7 +470,7 @@ export class CdkStack extends Stack {
             eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
             function: redirectsFunction
           }
-        ]
+        ],
       },
       additionalBehaviors: {
         '/api/*': {
@@ -496,6 +497,7 @@ export class CdkStack extends Stack {
           ttl: cdk.Duration.seconds(0)
         }
       ],
+      webAclId: props.devWebAclArn,
       defaultRootObject: 'index.html',
       priceClass: cloudfront.PriceClass.PRICE_CLASS_100,
       domainNames: [fullDomain],
@@ -526,8 +528,9 @@ export class CdkStack extends Stack {
             eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
             function: redirectsFunction
           }
-        ]
+        ],
       },
+      webAclId: props.devWebAclArn,
       priceClass: cloudfront.PriceClass.PRICE_CLASS_100,
       domainNames: [staticImagesInS3Domain],
       certificate: cert
