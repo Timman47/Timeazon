@@ -10,6 +10,11 @@ if (!stackName || !stackName.trim()) {
   process.exit(1)
 }
 
+if (!['dev', 'prod'].includes(environmentName)) {
+  console.error("APP ENV must be either 'dev' or 'prod'")
+  process.exit(1)
+}
+
 const settings = {
   env: {
     account: process.env.CDK_DEFAULT_ACCOUNT || 'NOT_SET',
@@ -22,31 +27,39 @@ const settings = {
   subDomain: stackName.toLowerCase(),
   dbName: 'dev',
   vpcName: 'CTASharedVPC-vpc',
+  devWebAclArn: 'arn:aws:wafv2:us-east-1:827602716979:global/webacl/ambiance-timeazon-dev-whitelist/17d3f6f4-e09e-429e-8d00-7b691ff6d7c6',
   environmentName
 }
 
 const app = new cdk.App();
-new CdkStack(app, 'devStack', {
-  env: settings.env,
-  permissionsBoundaryPolicyName: settings.permissionsBoundaryPolicyName,
-  subDomain: settings.subDomain,
-  stackName: settings.stackName,
-  certArn: settings.certArn,
-  domainName: settings.domainName,
-  dbName: settings.dbName,
-  vpcName: settings.vpcName,
-  environmentName
-});
 
-new CdkStack(app, 'prodStack', {
-  env: settings.env,
-  permissionsBoundaryPolicyName: settings.permissionsBoundaryPolicyName,
-  subDomain: settings.subDomain,
-  stackName: settings.stackName,
-  certArn: settings.certArn,
-  domainName: settings.domainName,
-  dbName: settings.dbName,
-  vpcName: settings.vpcName,
-  environmentName
-});
+if (environmentName === 'dev'){
+  new CdkStack(app, 'devStack', {
+    env: settings.env,
+    permissionsBoundaryPolicyName: settings.permissionsBoundaryPolicyName,
+    subDomain: settings.subDomain,
+    stackName: settings.stackName,
+    certArn: settings.certArn,
+    domainName: settings.domainName,
+    dbName: settings.dbName,
+    vpcName: settings.vpcName,
+    devWebAclArn: settings.devWebAclArn,
+    environmentName : 'dev'
+  });
+}
+
+if (environmentName === 'prod') {
+  new CdkStack(app, 'prodStack', {
+    env: settings.env,
+    permissionsBoundaryPolicyName: settings.permissionsBoundaryPolicyName,
+    subDomain: settings.subDomain,
+    stackName: settings.stackName,
+    certArn: settings.certArn,
+    domainName: settings.domainName,
+    dbName: settings.dbName,
+    vpcName: settings.vpcName,
+    devWebAclArn: undefined,
+    environmentName: 'prod'
+  });
+}
 
