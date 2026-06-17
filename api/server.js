@@ -12,11 +12,6 @@ import {
     createUser,
     loginUser
 } from './controllers/users.controller.js'
-// import {
-//     postToCartHandler,
-//     getToCartHandler,
-//     deleteFromCartHandler
-// } from '../addToCart.js'
 import { addToCart, getCart, removeFromCart } from './controllers/cart.controllers.js'
 import { createImageUploadUrl } from './controllers/uploads.express.js'
 import { bootstrap } from './controllers/bootstrap.controller.js'
@@ -74,11 +69,11 @@ app.delete('/api/addtocart', removeFromCart)
 
 app.post('/api/users', createUser)
 app.post('/api/login', loginUser)
-app.get('/api/healthcheck', (req, res) =>
-    runHandler(healthcheckHandler, req, res))
+
 
 app.get('/api/healthcheck', (req, res) => {
     return res.status(200).json({status: 'ok'})})
+    
 app.listen(PORT, () => {
     console.log(`API running on port ${PORT}`);
 })
