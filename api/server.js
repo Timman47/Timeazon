@@ -1,11 +1,14 @@
+import {
+    getProducts,
+    createProduct,
+    deleteProduct
+} from './controllers/products.express.js'
 import express from 'express'
 import cors from 'cors'
+import 'dotenv/config'
 
 import { healthcheckHandler } from '../health-check.js'
 import {
-    productCatalogHandler,
-    postProductHandler,
-    deleteProductHandler,
     bootstrapHandler,
     getImageUploadUrlHandler
 } from '../utility-functions.js'
@@ -59,18 +62,23 @@ async function runHandler(handler, req, res) {
     }
 }
 
-app.get('/api/healthcheck', (req, res) =>
-    runHandler(healthcheckHandler, req, res)
-)
+app.get('/api/products', getProducts)
+app.post('/api/products', createProduct)
+app.delete('/api/products/:id', deleteProduct)
+
+
+// app.get('/api/healthcheck', (req, res) =>
+//     runHandler(healthcheckHandler, req, res)
+// )
  
-app.get('/api/products', (req, res) =>
-    runHandler(productCatalogHandler, req, res)
-)
+// app.get('/api/products', (req, res) =>
+//     runHandler(productCatalogHandler, req, res)
+// )
  
-app.post('/api/products', (req, res) =>
-    runHandler(postProductHandler, req, res)
-)
+// app.post('/api/products', (req, res) =>
+//     runHandler(postProductHandler, req, res)
+// )
  
-app.delete('/api/products/:id', (req, res) =>
-    runHandler(deleteProductHandler, req, res)
-)
+// app.delete('/api/products/:id', (req, res) =>
+//     runHandler(deleteProductHandler, req, res)
+// )
