@@ -11,7 +11,7 @@ const ddb = DynamoDBDocumentClient.from(new DynamoDBClient({}))
 
 const normaliseEmail = (email) => String(email || '').trim().toLowerCase()
 
-const normaliseProductId = (productId) = String(productId || '').trim()
+const normaliseProductId = (productId) => String(productId || '').trim()
 
 
 export async function addToCart(req, res) {
