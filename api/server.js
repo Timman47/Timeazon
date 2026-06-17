@@ -7,16 +7,11 @@ import express from 'express'
 import cors from 'cors'
 import 'dotenv/config'
 
-import { healthcheckHandler } from '../health-check.js'
+import { healthcheckHandler } from '../CDK/functions/health-check.js'
 import {
     postUsersHandler,
     loginHandler
-} from '../users.js'
-// import {
-//     postToCartHandler,
-//     getToCartHandler,
-//     deleteFromCartHandler
-// } from '../addToCart.js'
+} from '../CDK/function/users.js'
 import { addToCart, getCart, removeFromCart } from './controllers/cart.controllers.js'
 import { createImageUploadUrL } from './controllers/uploads.express.js'
 import { bootstrap } from './controllers/bootstrap.controller.js'
