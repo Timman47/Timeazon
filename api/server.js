@@ -8,7 +8,6 @@ import cors from 'cors'
 import 'dotenv/config'
 
 import { healthcheckHandler } from '../health-check.js'
-import { bootstrap } from './controllers/bootstrap.controller.js'
 import {
     postUsersHandler,
     loginHandler
