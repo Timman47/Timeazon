@@ -45,9 +45,9 @@ async function runHandler(handler, req, res) {
         const headers = result?.headers || {}
         const body = result?.body ? JSON.parse(result.body) : {}
 
-        Object.entries(headers).forEach(([key, value])) => {
+        Object.entries(headers).forEach(([key, value]) => {
             res.setHeader(key, value)
-        }
+        })
 
         return res.status(statusCode).json(body)
     } catch (error) {
