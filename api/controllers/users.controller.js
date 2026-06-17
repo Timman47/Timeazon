@@ -63,7 +63,7 @@ export async function createUser(req, res) {
         const existing = await ddb.send(
             new GetCommand({
                 TableName: TABLE_NAME,
-                key: {email}
+                Key: { email }
             })
         )
 
@@ -136,7 +136,7 @@ export async function loginUser(req, res) {
         const result = await ddb.send(
             new GetCommand({
                 TableName: TABLE_NAME,
-                key: {email}
+                Key: {email}
             })
         )
 
