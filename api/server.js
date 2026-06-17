@@ -12,11 +12,12 @@ import {
     postUsersHandler,
     loginHandler
 } from '../users.js'
-import {
-    postToCartHandler,
-    getToCartHandler,
-    deleteFromCartHandler
-} from '../addToCart.js'
+// import {
+//     postToCartHandler,
+//     getToCartHandler,
+//     deleteFromCartHandler
+// } from '../addToCart.js'
+import { addToCart, getCart, removeFromCart } from './controllers/cart.controllers.js'
 import { createImageUploadUrL } from './controllers/uploads.express.js'
 import { bootstrap } from './controllers/bootstrap.controller.js'
 
@@ -66,6 +67,10 @@ app.delete('/api/products/:id', deleteProduct)
 
 app.post('/api/image-upload-url', createImageUploadUrL)
 app.post('/api/bootstrap', bootstrap)
+
+app.get('/api/addtocart', getCart)
+app.post('/api/addtocart', addToCart)
+app.delete('/api/addtocart', removeFromCart)
 
 // app.get('/api/healthcheck', (req, res) =>
 //     runHandler(healthcheckHandler, req, res)
