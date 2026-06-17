@@ -149,7 +149,7 @@ export const productCatalogHandler = async () => {
   }
 };
 
-  // try {
+//   try {
     
 //     const result = await runQuery(`
 //       SELECT name, description, price_credit, image_url, era
