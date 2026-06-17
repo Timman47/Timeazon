@@ -9,9 +9,14 @@ import 'dotenv/config'
 
 import { healthcheckHandler } from '../CDK/functions/health-check.js'
 import {
-    postUsersHandler,
-    loginHandler
-} from '../CDK/functions/users.js'
+    createUser,
+    loginUser
+} from './controllers/users.controller.js'
+// import {
+//     postToCartHandler,
+//     getToCartHandler,
+//     deleteFromCartHandler
+// } from '../addToCart.js'
 import { addToCart, getCart, removeFromCart } from './controllers/cart.controllers.js'
 import { createImageUploadUrl } from './controllers/uploads.express.js'
 import { bootstrap } from './controllers/bootstrap.controller.js'
@@ -67,6 +72,8 @@ app.get('/api/addtocart', getCart)
 app.post('/api/addtocart', addToCart)
 app.delete('/api/addtocart', removeFromCart)
 
+app.post('/api/users', createUser)
+app.post('/api/login', loginUser)
 app.get('/api/healthcheck', (req, res) =>
     runHandler(healthcheckHandler, req, res))
 
