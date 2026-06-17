@@ -1,5 +1,5 @@
 import crypto from 'crypto'
-import {DynamoDBClient} from '@aws=sdk/client-dynamodb'
+import {DynamoDBClient} from '@aws-sdk/client-dynamodb'
 import {
     DynamoDBDocumentClient,
     GetCommand,
@@ -92,7 +92,7 @@ export async function createUser(req, res) {
             user:{email}
         })
     } catch (error) {
-        if (error?name === 'ConditionalCheckFailedException') {
+        if (error?.name === 'ConditionalCheckFailedException') {
             return res.status(409).json({
                 status:'error',
                 message: 'User already exists'
