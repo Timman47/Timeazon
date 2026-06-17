@@ -67,6 +67,13 @@ app.get('/api/addtocart', getCart)
 app.post('/api/addtocart', addToCart)
 app.delete('/api/addtocart', removeFromCart)
 
+app.get('/api/healthcheck', (req, res) =>
+    runHandler(healthcheckHandler, req, res))
+
+app.get('/api/healthcheck', (req, res) => {
+    return res.status(200).json({status: 'ok'})
+})
+
 // app.get('/api/healthcheck', (req, res) =>
 //     runHandler(healthcheckHandler, req, res)
 // )
