@@ -8,9 +8,7 @@ import cors from 'cors'
 import 'dotenv/config'
 
 import { healthcheckHandler } from '../health-check.js'
-import {
-    bootstrapHandler
-} from '../utility-functions.js'
+import { bootstrap } from './controllers/bootstrap.controller.js'
 import {
     postUsersHandler,
     loginHandler
@@ -21,6 +19,7 @@ import {
     deleteFromCartHandler
 } from '../addToCart.js'
 import { createImageUploadUrL } from './controllers/uploads.express.js'
+import { bootstrap } from './controllers/bootstrap.controller.js'
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -67,7 +66,7 @@ app.post('/api/products', createProduct)
 app.delete('/api/products/:id', deleteProduct)
 
 app.post('/api/image-upload-url', createImageUploadUrL)
-
+app.post('/api/bootstrap', bootstrap)
 
 // app.get('/api/healthcheck', (req, res) =>
 //     runHandler(healthcheckHandler, req, res)
