@@ -9,8 +9,7 @@ import 'dotenv/config'
 
 import { healthcheckHandler } from '../health-check.js'
 import {
-    bootstrapHandler,
-    getImageUploadUrlHandler
+    bootstrapHandler
 } from '../utility-functions.js'
 import {
     postUsersHandler,
@@ -21,6 +20,7 @@ import {
     getToCartHandler,
     deleteFromCartHandler
 } from '../addToCart.js'
+import { createImageUploadUrL } from './controllers/uploads.express.js'
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -65,6 +65,8 @@ async function runHandler(handler, req, res) {
 app.get('/api/products', getProducts)
 app.post('/api/products', createProduct)
 app.delete('/api/products/:id', deleteProduct)
+
+app.post('/api/image-upload-url', createImageUploadUrL)
 
 
 // app.get('/api/healthcheck', (req, res) =>
