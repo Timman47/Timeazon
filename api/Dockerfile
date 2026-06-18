@@ -1,12 +1,13 @@
 FROM node:22-alpine
 
-WORKDIR /api
+WORKDIR /app/api
 
-COPY package*.json ./
+COPY api/package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY api/ ./
+COPY CDK/ ../CDK
 
 EXPOSE 3000
 
