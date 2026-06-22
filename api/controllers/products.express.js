@@ -1,3 +1,5 @@
+import { runQuery } from "../db/db"
+
 export async function getProducts(req, res) {
     try {
         const result = await runQuery(`
